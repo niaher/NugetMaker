@@ -22,7 +22,7 @@ To build a specific project you can run
 Build-Packages -Project "Project1"
 ```
 
-When you run `Build-Packages` command for the first time, a *.nuspec file will be created for each of your projects. **Initial run will fail** because the *.nuspec file will have some missing information. You will need to go and edit each *.nuspec file to setup your packages. For more information on how to do that, please see [NuGet documentation][nuspec-docs].
+When you run `Build-Packages` command for the first time, a \*.nuspec file will be created for each of your projects. **Initial run will fail because the \*.nuspec file will have some missing information**. You will need to go and edit each *.nuspec file to setup your packages. For more information on how to do that, please see [NuGet documentation][nuspec-docs].
 
 
 ## Push-Packages
