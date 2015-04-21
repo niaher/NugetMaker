@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package >
+  <metadata minClientVersion="2.5">
+        <id>NugetMaker</id>
+        <version>0.0.1</version>
+        <authors>niaher</authors>
+        <projectUrl>https://github.com/niaher/NugetMaker</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <developmentDependency>true</developmentDependency>
+        <description>NuGet package that helps make NuGet packages.</description>
+  </metadata>
+</package>
