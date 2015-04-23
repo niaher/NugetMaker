@@ -1,3 +1,7 @@
+function Get-Config ([string]$path) {
+	return (Get-Content -Path $path | Where { $_ -notmatch "^[\s]*//" }) -join ' ' | ConvertFrom-Json
+}
+
 function Build-Packages
 {
 	param (
@@ -5,7 +9,7 @@ function Build-Packages
 		[string]$Project
 	)
 
-	$config = Get-Content -Raw -Path NugetMaker.json | ConvertFrom-Json
+	$config = Get-Config "NugetMaker.json"
 	$projects = $config.projects
 
 	# Remove previously built packages.
@@ -43,9 +47,9 @@ function Push-Packages
 	param (
 		[Parameter(Mandatory=$false)]
 		[string]$ApiKey,
-		
+
 		[Parameter(Mandatory=$false)]
-		[string]$Target
+		[switch]$Local
 	)
 
 	$solutionDir = Split-Path $dte.Solution.FileName -Parent
@@ -54,28 +58,30 @@ function Push-Packages
 	# Get NuGet handle.
 	$nuget = "$solutionDir\.nuget\NuGet.exe"
 
-	$packages = Get-ChildItem -Path $packagesDir -Filter '*.nupkg' -Exclude '*.symbols.nupkg' -Recurse
-	
-	# By default push to remote.
-	$Target = if ($Target) { $Target } else { "remote" }
-	
-	$config = Get-Content -Raw -Path NugetMaker.json | ConvertFrom-Json
-	$destination = $config.targets | select -ExpandProperty $Target
-	
+	$packages = Get-ChildItem -Path "$packagesDir\*.nupkg" -Exclude '*.symbols.nupkg'
+
+	# Get config file.
+	$configFile = if ($Local) { "NugetMaker.Local.json" } else { "NugetMaker.json" }
+	$config = Get-Config $configFile
+
+	# Get push target.
+	$destination = $config.target
+
 	foreach ($package in $packages)
 	{
-		Write-Host "`r`nPushing '$package' package to '$destination'..." -ForegroundColor 'green' -BackgroundColor 'black'
-		
+		$packageName = [System.IO.Path]::GetFileName($package)
+		Write-Host "`r`nPushing '$packageName' to '$destination'..." -ForegroundColor 'green' -BackgroundColor 'black'
+
 		if ($ApiKey)
 		{
 			&$nuget push $package -ApiKey $ApiKey
 		}
-		else 
+		else
 		{
 			&$nuget push $package -source $destination
 		}
 	}
 }
-	
+
 Export-ModuleMember Build-Packages
 Export-ModuleMember Push-Packages

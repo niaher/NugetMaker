@@ -1,0 +1,11 @@
+// This configuration will be used when running `Push-Packages -Local`.
+// The goal is to allow you to test your packages locally before pushing
+// them to nuget.org or other remote server. This file should be ignored
+// by the source control (git/TFS/etc), because it is only useful on the
+// local machine.
+
+{
+	// Make sure to use either "double-backward-slash" (\\) or a "forward-slash" (/).
+	// A "single-backward-slash" (\) is treated as an escape character.
+	"target": "C:\\Nugets"
+}

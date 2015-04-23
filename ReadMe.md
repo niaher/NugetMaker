@@ -54,16 +54,26 @@ This file contains basic configuration for your solution. When you `Install-Pack
 	"projects": [
 		"MySolution.MyProject1",
 		"MySolution.MyProject2"],
-	
-	// The list of targets to which you want to push. For example
-	// `Push-Packages -Target "local"` will copy the NuGet packages to "C:/Nugets".
-	// This can be very useful for testing your packages locally before pushing
-	// them to nuget.org or other remote server. You can configure as many targets
-	// as you like. By default packages will be pushed to "remote".
-	"targets": {
-		"local":"C:/Nugets",
-		"remote":"http://www.nuget.org/"
-	}
+
+	// The target to which you want to push. It can be either a remote server,
+	// such as nuget.org or a UNC path (e.g. - "\\remote-computer\c$\Nugets").
+	// For UNC path make sure to use either "double-backward-slash" (\\) or a "forward-slash" (/).
+	// A "single-backward-slash" (\) is treated as an escape character. So for example,
+	// if you want to push to "\\remote-computer\c$\Nugets", your target should be set to
+	// "\\\\remote-computer\\c$\\Nugets".
+	"target": "http://www.nuget.org/"
+}
+```
+
+## Config - NugetMaker.Local.json
+When you install NugetMaker package, it will automatically create another config file at *$(SolutionDir)/NugetMaker.Local.json*. This file will contain configuration for `Push-Packages -Local` command. The goal is to allow you to test your packages locally before pushing them to nuget.org or other remote server. This file should be ignored
+by the source control (git/TFS/etc), because it is only useful on the local machine.
+
+```
+{
+	// Make sure to use either "double-backward-slash" (\\) or a "forward-slash" (/).
+	// A "single-backward-slash" (\) is treated as an escape character.
+	"target": "C:\\Nugets"
 }
 ```
 

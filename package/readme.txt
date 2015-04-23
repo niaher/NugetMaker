@@ -1,1 +1,0 @@
-IMPORTANT: Please configure ~/NugetMaker.json before trying to build any packages.
