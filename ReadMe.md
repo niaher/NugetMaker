@@ -32,13 +32,15 @@ This command will publish your pre-built packages. It is as simple as:
 Push-Packages
 ```
 
-By default packages will be published to the *remote* (see configuration file inside *$(SolutionDir)/NugetMaker.json*). To publish to a different target you can do this:
+The packages will be published to the target configured in *$(SolutionDir)/NugetMaker.json*.
+
+If you would like to test your package locally before actually publishing it, you can alternatively push packages to a temporary location (say your local folder). To accomplish this you would do
 
 ```
-Push-Packages -Target local
+Push-Packages -Local
 ```
 
-However you will need to make sure that the target is specified inside the NugetMaker.json.
+The target for this command is configured inside *$(SolutionDir)/NugetMaker.Local.json*.
 
 ## Config - NugetMaker.json
 This file contains basic configuration for your solution. When you `Install-Package NugetMaker` the configuration file will be created inside the solution directory. You can then modify its contents to suit your setup. By default it's preconfigured to this:
