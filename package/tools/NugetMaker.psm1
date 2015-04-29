@@ -74,7 +74,7 @@ function Push-Packages
 
 		if ($ApiKey)
 		{
-			&$nuget push $package -ApiKey $ApiKey
+			&$nuget push $package -source $destination -ApiKey $ApiKey
 		}
 		else
 		{
