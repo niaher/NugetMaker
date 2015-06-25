@@ -79,6 +79,9 @@ by the source control (git/TFS/etc), because it is only useful on the local mach
 }
 ```
 
+## Pre-requisites
+NugetMaker requires PowerShell 4.0 or higher. You can download it from [https://www.microsoft.com/en-us/download/details.aspx?id=40855](https://www.microsoft.com/en-us/download/details.aspx?id=40855).
+
 Enjoy!
 
 [nuspec-docs]:http://docs.nuget.org/create/nuspec-reference
