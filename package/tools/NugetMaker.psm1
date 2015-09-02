@@ -43,7 +43,8 @@ function Build-Packages
 		# Build package.
 		&$nuget pack $projectFullName `
 			-OutputDirectory "$currentDir" `
-			-Symbols
+			-Symbols `
+			-Properties Configuration=Release
 	}
 }
 
