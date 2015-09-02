@@ -22,23 +22,28 @@ function Build-Packages
 	# Get NuGet handle.
 	$nuget = "$solutionDir\.nuget\NuGet.exe"
 
+	# Clean solution
+	$dte.Solution.SolutionBuild.Clean($true)
+
 	foreach ($project in $projects | where {$_ -like "*$Project*"})
 	{
 		Write-Host "`r`nBuilding '$project' package..." -ForegroundColor 'green' -BackgroundColor 'black'
 
 		$projectDir = "$solutionDir\$project"
-
+		$projectFullName = "$projectDir\$project.csproj"
+		
 		# Make sure .nuspec file exists.
 		cd $projectDir
 		&$nuget spec -Verbosity quiet
 		cd $currentDir
+		
+		# Build project
+		$dte.Solution.SolutionBuild.BuildProject("Release", $projectFullName, $true)
 
 		# Build package.
-		&$nuget pack "$projectDir\$project.csproj" `
+		&$nuget pack $projectFullName `
 			-OutputDirectory "$currentDir" `
-			-Build `
-			-Symbols `
-			-Properties Configuration=Release
+			-Symbols
 	}
 }
 
