@@ -1,6 +1,8 @@
 # What is this?
 NugetMaker is a tiny NuGet package that will help you create your own NuGet packages.
 
+*IMPORTANT:* NugetMaker won't work in Visual Studio 2015, because Visual Studio 2015 doesn't support _solution level packages_. There's a [plan to add the feature back](https://github.com/NuGet/Home/issues/1521), but it might take some time. In the meantime you either have to stick with VS2013 or find an alternative to build your NuGet packages.
+
 ## Install
 ```
 Install-Package NugetMaker
