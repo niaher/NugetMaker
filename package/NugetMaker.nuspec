@@ -2,7 +2,7 @@
 <package >
   <metadata minClientVersion="2.5">
         <id>NugetMaker</id>
-        <version>0.0.5</version>
+        <version>0.0.6</version>
         <authors>niaher</authors>
         <projectUrl>https://github.com/niaher/NugetMaker</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>

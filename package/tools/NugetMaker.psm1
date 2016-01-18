@@ -37,14 +37,12 @@ function Build-Packages
 		&$nuget spec -Verbosity quiet
 		cd $currentDir
 		
-		# Build project
-		$dte.Solution.SolutionBuild.BuildProject("Release", $projectFullName, $true)
-
 		# Build package.
 		&$nuget pack $projectFullName `
 			-OutputDirectory "$currentDir" `
 			-Symbols `
-			-Properties Configuration=Release
+			-Properties Configuration=Release `
+            -Build
 	}
 }
 
